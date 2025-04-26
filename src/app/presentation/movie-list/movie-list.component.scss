@@ -3,7 +3,34 @@
 :host {
   display: block;
 }
+.movie-list__filter {
+  padding: 0.8rem;
+  display: flex;
+  justify-content: center;
+  background-color: mat.get-color-from-palette(mat.$grey-palette, 800);
 
+  .movie-list__filter-input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 4px;
+    border: 1px solid mat.get-color-from-palette(mat.$grey-palette, 600);
+    background-color: mat.get-color-from-palette(mat.$grey-palette, 700);
+    color: white;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+
+    &:focus {
+      outline: none;
+      background-color: mat.get-color-from-palette(mat.$grey-palette, 600);
+      border-color: mat.get-color-from-palette(mat.$cyan-palette, 500);
+    }
+
+    &::placeholder {
+      color: mat.get-color-from-palette(mat.$grey-palette, 400);
+    }
+  }
+}
 .movie-list {
   padding: 1rem;
   background-color: mat.get-color-from-palette(mat.$grey-palette, 900);

@@ -1,6 +1,15 @@
-@if (movies().length > 0) {
+<div class="movie-list__filter">
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    placeholder="Filtrar por título..."
+    class="movie-list__filter-input"
+  />
+</div>
+
+@if (filteredMovies.length > 0) {
   <div class="movie-list__grid">
-    @for (movie of movies(); track movie.id) {
+    @for (movie of filteredMovies; track movie.id) {
       <div class="movie-list__card">
         <mat-card class="movie-list__card-content">
           <div class="movie-list__card-header">
@@ -32,9 +41,14 @@
       </div>
     }
   </div>
-} @else {
+} @else if (loadingAndNoResults()) {
   <div class="movie-list__loading">
     <mat-spinner diameter="50"></mat-spinner>
     <p class="movie-list__loading-text">Carregando filmes...</p>
+  </div>
+} @else if (noResults()) {
+  <div class="movie-list__loading">
+    <mat-icon>search_off</mat-icon>
+    <p class="movie-list__loading-text">Nenhum filme encontrado com este título.</p>
   </div>
 }

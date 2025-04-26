@@ -1,5 +1,5 @@
-import { Component, inject, computed } from '@angular/core';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { Component, inject, computed, Signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
@@ -9,6 +9,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { GetPopularMoviesUseCase } from '../../application/use-cases/get-popular-movies.use-case';
 import { TmdbService } from '../../infrastructure/tmdb.service';
+import { FormsModule } from '@angular/forms';
+import { Movie } from '../../core/models/movie.model';
 
 @Component({
   selector: 'app-movie-list',
@@ -21,6 +23,7 @@ import { TmdbService } from '../../infrastructure/tmdb.service';
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    FormsModule,
   ],
   providers: [GetPopularMoviesUseCase, TmdbService],
   templateUrl: './movie-list.component.html',
@@ -31,8 +34,19 @@ export class MovieListComponent {
 
   private readonly moviesSignal = toSignal(
     this.getPopularMoviesUseCase.execute(),
-    { initialValue: [] }
+    { initialValue: null }
   );
 
-  readonly movies = computed(() => this.moviesSignal());
+  readonly movies: Signal<Movie[]> = computed(() => this.moviesSignal() || []);
+
+  public filterText: string = '';
+
+  get filteredMovies() {
+    return this.movies().filter(movie =>
+      movie.title.toLowerCase().includes(this.filterText.toLowerCase())
+    );
+  }
+
+  readonly loadingAndNoResults = computed(() => this.moviesSignal() === null && this.filteredMovies.length === 0);
+  readonly noResults = computed(() => this.moviesSignal() !== null && this.filteredMovies.length === 0);
 }
