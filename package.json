@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:jacto-tmdb-hexagonal": "node dist/jacto-tmdb-hexagonal/server/server.mjs",
-    "prerender": "ng run jacto-tmdb-hexagonal:prerender"
+    "vercel-build": "ng build && node dist/jacto-tmdb-hexagonal/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +25,6 @@
     "@angular/router": "^17.1.0",
     "@angular/ssr": "^17.1.3",
     "express": "^4.18.2",
-    "node-fetch": "^3.3.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

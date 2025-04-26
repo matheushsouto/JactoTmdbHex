@@ -1,0 +1,16 @@
+{
+  "version": 6,
+  "public": true,
+  "name": "jacto-tmdb-hex",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api"
+    }
+  ],
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "dist/jacto-tmdb-hexagonal/**"
+    }
+  }
+}
