@@ -6,9 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:jacto-tmdb-hexagonal": "node dist/jacto-tmdb-hexagonal/server/server.mjs",
-    "vercel-build": "ng build && node dist/jacto-tmdb-hexagonal/server/server.mjs"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
