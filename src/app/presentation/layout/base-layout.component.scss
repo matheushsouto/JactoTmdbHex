@@ -1,0 +1,102 @@
+@use '@angular/material' as mat;
+
+// Tema
+$dark-primary: mat.define-palette(mat.$blue-grey-palette, 900, 700, 900);
+$dark-accent: mat.define-palette(mat.$deep-orange-palette, A200, A100, A400);
+$dark-warn: mat.define-palette(mat.$red-palette);
+
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $dark-accent,
+    warn: $dark-warn,
+  )
+));
+
+@include mat.core();
+@include mat.all-component-themes($dark-theme);
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: mat.get-color-from-palette($dark-primary, 900);
+  font-family: 'Roboto', sans-serif;
+  color: mat.get-color-from-palette($dark-primary, 200);
+  box-sizing: border-box;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.layout__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  width: 100%;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  color: white;
+  z-index: 1000;
+  background-color: mat.get-color-from-palette($dark-primary, 900);
+
+  .layout__toolbar-spacer {
+    flex: 1;
+  }
+
+  .layout__link {
+    font-weight: 500;
+    color: white;
+    font-size: 1.4rem;
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    background: transparent;
+    border: 0;
+
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+
+    &:hover {
+      background: transparent;
+      border: 0;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 1.1rem;
+      padding: 0.6rem 1.5rem;
+    }
+  }
+}
+
+.layout__main {
+  flex: 1;
+  padding: 1.5rem;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  background-color: mat.get-color-from-palette($dark-primary, 900);
+
+  scrollbar-width: thin;
+  scrollbar-color: mat.get-color-from-palette($dark-primary, 700) transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: mat.get-color-from-palette($dark-primary, 700);
+    border-radius: 4px;
+  }
+}
