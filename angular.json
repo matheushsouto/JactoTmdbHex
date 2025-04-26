@@ -91,7 +91,7 @@
         "prerender": {
           "builder": "@angular/platform-server:prerender",
           "options": {
-            "routesFile": "./src/prerender-routes.ts"
+            "routesFile": "./prerender-routes.ts"
           }
         }
       }
